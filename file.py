@@ -31,11 +31,6 @@ sql ='''CREATE TABLE RegularFit(
 )'''
 cursor.execute(sql)
 
-cursor.execute("DROP TABLE IF EXISTS CheckProducts")
-sql ='''CREATE TABLE CheckProducts(
-   uniq_id CHAR(200) NOT NULL
-)'''
-cursor.execute(sql)
 
 cursor.execute("SELECT * FROM AllProducts")
 rows = cursor.fetchall()
@@ -43,7 +38,6 @@ rows = cursor.fetchall()
 for row in rows:
     if row[index] is not None and row[index].find("=>nil") ==-1  :
         array_of_objects = json.loads(row[index].replace("=>",':'))
-        cursor.execute("insert into CheckProducts values (?)", [row[1]])
         fabric = ''
         ideal_for = ''
         table = 'Skip'
